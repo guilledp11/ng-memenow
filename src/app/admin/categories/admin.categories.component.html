@@ -1,0 +1,67 @@
+<h3 class="text-center">Categories</h3>
+<div class="container-fluid">
+    <div class="p-2 text-end">
+        <button mat-raised-button color="primary" class="m-1 ngmn-add-button" routerLink="/admin/categories/create">
+            <mat-icon>add</mat-icon>
+            Create
+        </button>
+    </div>
+    <div class="row justify-content-center">
+        <div class="col-lg-10">
+            <table mat-table [dataSource]="dataSource" class="mat-elevation-z8 table table-striped table-bordered">
+
+                <!-- Definición de columnas -->
+                <ng-container matColumnDef="id">
+                    <th mat-header-cell *matHeaderCellDef class="text-center align-middle">ID</th>
+                    <td mat-cell *matCellDef="let category" class="text-center align-middle">{{ category.id }}</td>
+                </ng-container>
+
+                <ng-container matColumnDef="name">
+                    <th mat-header-cell *matHeaderCellDef class="text-center align-middle">Name</th>
+                    <td mat-cell *matCellDef="let category" class="text-center align-middle">{{ category.name }}</td>
+                </ng-container>
+
+                <ng-container matColumnDef="isChild">
+                    <th mat-header-cell *matHeaderCellDef class="text-center align-middle">Is Child</th>
+                    <td mat-cell *matCellDef="let category" class="text-center align-middle">{{ category.parentId }}</td>
+                </ng-container>
+
+                <ng-container matColumnDef="subcategories">
+                    <th mat-header-cell *matHeaderCellDef class="text-center align-middle">Subcategories</th>
+                    <td mat-cell *matCellDef="let category" class="text-center align-middle">{{ category.subcategories }}</td>
+                </ng-container>
+
+                <ng-container matColumnDef="actions">
+                    <th mat-header-cell *matHeaderCellDef class="text-center align-middle">Actions</th>
+                    <td mat-cell *matCellDef="let category" class="text-center align-middle">
+                        <button mat-raised-button color="warn" class="m-1" 
+                            [routerLink]="['/admin/categories', 'edit', category.id]" matTooltip="Edit Category">
+                            <mat-icon>edit</mat-icon> 
+                            Edit
+                        </button>
+                        <button mat-raised-button color="accent" class="m-1" 
+                            (click)="deleteCategory(category.id)" matTooltip="Delete Category">
+                            <mat-icon>delete</mat-icon> 
+                            Delete
+                        </button>
+                    </td>
+                </ng-container>
+
+                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                <tr mat-row *matRowDef="let category; columns: displayedColumns;"></tr>
+
+                <!-- Mensaje si no hay categorías -->
+                <tr *ngIf="!dataSource.data.length">
+                    <td colspan="5" class="text-center">No categories available.</td>
+                </tr>
+            </table>
+
+            <!-- Paginador -->
+            <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" showFirstLastButtons></mat-paginator>
+        </div>
+    </div>
+</div>
+
+<ng-template #extraButtonsTemplate>
+    <button mat-button (click)="onAcceptWithConditions()">Delete in Cascade</button>
+</ng-template>
