@@ -1,0 +1,47 @@
+/* user-selector.component.css */
+
+.selected-user-card {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 6px 10px; /* Menor padding para reducir tamaño */
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  background-color: #f1f1f1;
+  margin-bottom: 10px;
+  font-size: 14px;
+  max-width: 250px; /* Sigue siendo compacto */
+}
+
+.user-info {
+  flex-grow: 1; /* Permite que el contenido del nombre use todo el espacio disponible */
+  display: flex;
+  align-items: center;
+}
+
+.user-name {
+  font-weight: 500;
+  color: #333;
+  white-space: nowrap; /* Evitar que el nombre se divida en varias líneas */
+  overflow: hidden;
+  text-overflow: ellipsis; /* Añadir puntos suspensivos si el nombre es demasiado largo */
+}
+
+.remove-button {
+  background-color: transparent;
+  border: none;
+  color: #888; /* Color gris sutil */
+  font-size: 16px;
+  cursor: pointer;
+  padding: 0;
+  margin-left: 8px; /* Margen mínimo entre el texto y el botón */
+  transition: color 0.2s ease-in-out;
+}
+
+.remove-button:hover {
+  color: #aaa; /* Color ligeramente más claro al hacer hover */
+}
+
+.remove-button:focus {
+  outline: none;
+}

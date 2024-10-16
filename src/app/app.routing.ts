@@ -7,10 +7,15 @@ import { TimelineComponent } from "./home/timeline.component";
 import { UserInfoComponent } from "./home/userInfo.component";
 import { AdminCategoriesComponent } from "./admin/categories/admin.categories.component";
 import { AdminCategoriesFormComponent } from "./admin/categories/admin.categories.form.component";
+import { VisualizationGroupsComponent } from "./user/visualization-groups/visualization.groups.component";
+import { VisualizationGroupsFormComponent } from "./user/visualization-groups/visualization.groups.form.component";
 
 const childRoutes: Routes = [
     { path: "", component: TimelineComponent },
-    { path: "userInfo", component:  UserInfoComponent },
+    { path: "profile", component:  UserInfoComponent },
+    { path: "user/visualization-groups", component: VisualizationGroupsComponent},
+    { path: "user/visualization-groups/:mode/:id", component: VisualizationGroupsFormComponent},
+    { path: "user/visualization-groups/:mode", component: VisualizationGroupsFormComponent},
     { path: "admin/categories", component: AdminCategoriesComponent},
     { path: "admin/categories/:mode/:id", component: AdminCategoriesFormComponent},
     { path: "admin/categories/:mode", component: AdminCategoriesFormComponent}

@@ -1,0 +1,63 @@
+<h3 class="text-center">Visualization groups</h3>
+<div class="container-fluid">
+    <div class="p-2 text-end">
+        <button mat-raised-button color="primary" class="m-1 ngmn-add-button" routerLink="/user/visualization-groups/create">
+            <mat-icon>add</mat-icon>
+            Create
+        </button>
+    </div>
+    <div class="row justify-content-center">
+        <div class="col-lg-10">
+            <table mat-table [dataSource]="dataSource" class="mat-elevation-z8 table table-striped table-bordered">
+
+                <!-- Definición de columnas -->
+                <ng-container matColumnDef="id">
+                    <th mat-header-cell *matHeaderCellDef class="text-center align-middle">ID</th>
+                    <td mat-cell *matCellDef="let visualizationGroup" class="text-center align-middle">{{ visualizationGroup.id }}</td>
+                </ng-container>
+
+                <ng-container matColumnDef="name">
+                    <th mat-header-cell *matHeaderCellDef class="text-center align-middle">Name</th>
+                    <td mat-cell *matCellDef="let visualizationGroup" class="text-center align-middle">{{ visualizationGroup.name }}</td>
+                </ng-container>
+
+                <ng-container matColumnDef="attached">
+                    <th mat-header-cell *matHeaderCellDef class="text-center align-middle">Attached</th>
+                    <td mat-cell *matCellDef="let visualizationGroup" class="text-center align-middle">{{ visualizationGroup.attached }}</td>
+                </ng-container>
+
+                <ng-container matColumnDef="numUsers">
+                    <th mat-header-cell *matHeaderCellDef class="text-center align-middle">Nº users</th>
+                    <td mat-cell *matCellDef="let visualizationGroup" class="text-center align-middle">{{ visualizationGroup.numUsers }}</td>
+                </ng-container>
+
+                <ng-container matColumnDef="actions">
+                    <th mat-header-cell *matHeaderCellDef class="text-center align-middle">Actions</th>
+                    <td mat-cell *matCellDef="let visualizationGroup" class="text-center align-middle">
+                        <button mat-raised-button color="warn" class="m-1" 
+                            [routerLink]="['/user/visualization-groups', 'edit', visualizationGroup.id]" matTooltip="Edit Visualization Group">
+                            <mat-icon>edit</mat-icon> 
+                            Edit
+                        </button>
+                        <button mat-raised-button color="accent" class="m-1" 
+                            (click)="deleteVisualizationGroup(visualizationGroup.id)" matTooltip="Delete Visualization Group">
+                            <mat-icon>delete</mat-icon> 
+                            Delete
+                        </button>
+                    </td>
+                </ng-container>
+
+                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                <tr mat-row *matRowDef="let visualizationGroup; columns: displayedColumns;"></tr>
+
+                <!-- Mensaje si no hay datos -->
+                <tr *ngIf="!dataSource.data.length">
+                    <td colspan="5" class="text-center">No data available.</td>
+                </tr>
+            </table>
+
+            <!-- Paginador -->
+            <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" showFirstLastButtons></mat-paginator>
+        </div>
+    </div>
+</div>
