@@ -20,8 +20,6 @@ export class HttpRequestInterceptor implements HttpInterceptor {
       withCredentials: true,
     });
 
-    console.log(req);
-
     return next.handle(req).pipe(
       catchError((error) => {
         if (

@@ -14,11 +14,11 @@ export class UserInfoComponent {
         this.username = storageService.getUser().username;
         this.roles = storageService.getUser().roles;
         activeRoute.params.subscribe(params => {
-            console.log(params);
+        
         });
     }
 
     ngOnInit() {
-        console.log("En este instante el componente ha cargado UserInfoComponent");
+
       }
 }

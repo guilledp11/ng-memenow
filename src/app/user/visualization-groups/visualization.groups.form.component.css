@@ -1,0 +1,57 @@
+/* Para dar margen al formulario y que no esté pegado a los bordes */
+.form-container {
+    max-width: 1400px;  /* Limita el ancho máximo del formulario */
+    margin: 20px auto;  /* Centra el formulario horizontalmente */
+    padding: 20px;  /* Espaciado interno */
+}
+
+/* Para alinear los campos de 'Name' y 'Attached' en la misma fila */
+.form-row {
+    display: flex;
+    justify-content: space-between;  /* Distribuir los campos horizontalmente */
+    gap: 20px;  /* Espaciado entre los campos */
+}
+
+.form-row .form-group {
+    flex: 1;  /* Los campos ocuparán el mismo espacio */
+}
+
+/* Responsive: en pantallas pequeñas, los campos vuelven a una columna */
+@media (max-width: 768px) {
+    .form-row {
+        flex-direction: column;
+    }
+}
+
+/* Línea horizontal para separar el formulario de los botones */
+.separator-line {
+    border: none;
+    border-top: 1px solid #ccc;  /* Color gris claro para la línea */
+    margin: 20px 0;
+}
+
+/* Posicionamos los botones al final de la pantalla */
+.form-actions {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background-color: #f9f9f9;  /* Fondo igual al del formulario */
+    padding: 10px;
+    box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);  /* Sombra para hacer que destaquen */
+    display: flex;
+    justify-content: center;  /* Centrar los botones horizontalmente */
+    gap: 10px;  /* Espaciado entre los botones */
+    z-index: 1000;  /* Para asegurarnos que siempre están visibles */
+}
+
+.btn-large {
+    padding: 2px 18px;  /* Aumenta el padding del botón */
+    font-size: 14px;  /* Aumenta el tamaño de la fuente */
+    min-width: 120px;  /* Asegura un ancho mínimo */
+}
+
+.user-selector {
+    flex: 0 0 50%; /* Ocupa el 50% de la fila */
+    margin-top: 15px; /* Espaciado superior */
+}

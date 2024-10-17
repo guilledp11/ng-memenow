@@ -1,25 +1,26 @@
 <!-- user-selector.component.html -->
-<div>
-    <div class="selected-users">
-        <div *ngFor="let user of selectedUsers" class="selected-user-card">
-            <div class="user-info">
-                <span class="user-name">{{ user.username }}</span>
-            </div>
-            <button class="remove-button" (click)="removeUser(user)">X</button>
+<div class="user-selector-container">
+    <div *ngIf="selectedUsers.length > 0" class="selected-users">
+        <div *ngFor="let user of selectedUsers" class="user-card">
+            <span class="user-name">{{ user.username }}</span>
+            <button class="remove-btn" (click)="removeUser(user)">×</button>
         </div>
     </div>
-    
-    <input type="text" [(ngModel)]="searchQuery" (input)="onSearch()" placeholder="Buscar usuarios..." />
+
+    <input type="text" [(ngModel)]="searchQuery" (input)="onSearch()" placeholder="Buscar usuarios..." class="search-input"/>
 
     <div class="user-list">
         <div *ngFor="let user of users" class="user-item">
-            <label>
+            <label class="custom-checkbox">
                 <input type="checkbox" [checked]="selectedUsers.includes(user)" (change)="toggleUserSelection(user)" />
+                <span class="checkmark"></span>
                 {{ user.username }}
             </label>
         </div>
     </div>
 
-    <button *ngIf="!loading && hasMoreUsers" (click)="loadMoreUsers()">Cargar más</button>
+    <button *ngIf="!loading && hasMoreUsers" (click)="loadMoreUsers()" class="load-more-btn">
+        <span class="plus-icon">+</span> Cargar más
+    </button>
     <div *ngIf="loading" class="loading">Cargando más usuarios...</div> <!-- Indicador de carga -->
 </div>

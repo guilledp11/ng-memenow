@@ -6,12 +6,15 @@ import { MatSnackBar } from "@angular/material/snack-bar";
 
 @Component({
     selector: "visualization-groups-form",
-    templateUrl: "visualization.groups.form.component.html"
+    templateUrl: "visualization.groups.form.component.html",
+    styleUrls: ['./visualization.groups.form.component.css']
 })
 export class VisualizationGroupsFormComponent {
 
     element: any = {};
     editing: boolean = false;
+    initialSelectedUsers: any[] = [];
+    selectedUsersLoaded: boolean = false;
     contactGroups: any[] = [{
         "id": 0, "name": "Contact group 1"
     }];
@@ -37,6 +40,9 @@ export class VisualizationGroupsFormComponent {
                 service.getElement(id).subscribe(p => {
                     Object.assign(this.element, p || {});
                     this.elementForm.patchValue(this.element);
+                    this.initialSelectedUsers = p.contacts;
+                    this.selectedUsersLoaded = true;
+                    this.element.updatingContacts = true;
                 });
             }
         });

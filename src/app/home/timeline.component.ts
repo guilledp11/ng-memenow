@@ -9,12 +9,12 @@ export class TimelineComponent {
 
     constructor( activeRoute: ActivatedRoute) {
         activeRoute.params.subscribe(params => {
-            console.log(params);
+        
         });
     }
 
     ngOnInit() {
-        console.log("En este instante el componente ha cargado TimelineComponent");
+        
     }
 
 }

@@ -1,5 +1,5 @@
 // user-selector.component.ts
-import { Component, OnInit, HostListener, EventEmitter, Output } from '@angular/core';
+import { Component, OnInit, HostListener, EventEmitter, Output, Input } from '@angular/core';
 import { UserService } from '../user.service';
 
 
@@ -10,10 +10,13 @@ import { UserService } from '../user.service';
 })
 export class MultipleUserSelectorComponent implements OnInit {
 
+    @Input() selectedUsers: any[] = [];
+
+    @Input() editing: boolean = false;
+
     @Output() selectedUsersChange = new EventEmitter<any[]>(); 
 
     users: any[] = [];
-    selectedUsers: any[] = [];
     searchQuery: string = '';
     page: number = 0;
     pageSize: number = 5;
@@ -25,6 +28,8 @@ export class MultipleUserSelectorComponent implements OnInit {
     ngOnInit() {
         this.loadUsers();
     }
+
+    
 
     loadUsers() {
         if (this.loading) return; // Evitar múltiples cargas al mismo tiempo

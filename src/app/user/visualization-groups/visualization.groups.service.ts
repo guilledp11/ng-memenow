@@ -18,7 +18,6 @@ export class VisualizationGroupsService {
     }
 
     saveElement(element: any): Observable<any | undefined> {
-        alert("entra");
         if (element.id == 0 || element.id == null) {
             return this.http.post<any>("http://localhost:8080/api/visualization-groups/create", element);
         } else {

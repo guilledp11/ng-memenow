@@ -13,12 +13,12 @@ export class HomeComponent {
 
     constructor(private activeRoute: ActivatedRoute, private authService: AuthService) {
         activeRoute.params.subscribe(params => {
-            console.log(params);
+            
         });
     }
 
     ngOnInit() {
-        console.log("En este instante el componente ha cargado HomeComponent");
+        
     }
 
     get isAdmin(): boolean {
