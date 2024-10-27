@@ -1,33 +1,51 @@
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-  <a class="navbar-brand" routerLink="">MemeNow</a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-    aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
+<div class="app-container">
+  <sidebar></sidebar> <!-- Menú lateral izquierdo -->
 
-  <div class="collapse navbar-collapse" id="navbarSupportedContent">
-    <ul class="navbar-nav mr-auto">
-      <li class="nav-item" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
-        <a class="nav-link" routerLink="">Timeline</a>
-      </li>
-      <li class="nav-item" routerLinkActive="active">
-        <a class="nav-link" routerLink="user/profile">Profile</a>
-      </li>
-      <li class="nav-item" routerLinkActive="active">
-        <a class="nav-link" routerLink="/user/visualization-groups">Visualization groups</a>
-      </li>
-      <li *ngIf="isAdmin" class="nav-item dropdown" [class.show]="dropdownOpen">
-        <a class="nav-link dropdown-toggle" role="button" (click)="toggleDropdown()" aria-haspopup="true"
-          [attr.aria-expanded]="dropdownOpen">
-          Funciones Admin
-        </a>
-        <div class="dropdown-menu" [class.show]="dropdownOpen">
-          <a class="dropdown-item" (click)="closeDropdown()" routerLink="/admin/categories">Categories</a>
-          <a class="dropdown-item" (click)="closeDropdown()" routerLink="/admin/users">Users</a>
+  <div class="content-container">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav mr-auto">
+
+        </ul>
+
+        <div class="navbar-item-group-right d-flex align-items-center ml-auto"> <!-- Elementos a la derecha -->
+          <div class="search-container">
+            <input class="form-control search-input" type="search" placeholder="Search..." aria-label="Search"
+              [(ngModel)]="userSearchQuery" (input)="searchUser()">
+            <div *ngIf="isSearchUserDropdownOpen" class="search-dropdown-menu">
+              <div *ngFor="let user of userSearchResults; let i = index" class="search-dropdown-item">
+                <a class="search-dropdown-link" [routerLink]="['/users', user.id]">{{user.username}}</a>
+              </div>
+
+              <button class="search-dropdown-show-all-button">Mostrar todos los resultados</button>
+            </div>
+          </div>
+
+
+          <div class="dropdown" style="margin-left: 10px;">
+            <button class="btn dropdown-toggle d-flex align-items-center" type="button" id="dropdownMenuButton"
+              data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <img [src]="profilePicUrl" alt="User Photo" class="user-photo" />
+              <span class="username">@{{user?.username}}</span>
+            </button>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+              <a class="dropdown-item" href="#">
+                <mat-icon>option_1_icon</mat-icon> Option 1
+              </a>
+              <a class="dropdown-item" href="#">
+                <mat-icon>option_2_icon</mat-icon> Option 2
+              </a>
+            </div>
+          </div>
+
         </div>
-      </li>
-    </ul>
+      </div>
+    </nav>
+    <router-outlet></router-outlet> <!-- Aquí se renderizan los componentes de las rutas -->
   </div>
-</nav>
-
-<router-outlet></router-outlet>
+</div>

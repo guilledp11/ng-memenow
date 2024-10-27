@@ -19,4 +19,8 @@ export class MemeService {
     findMediaById(mediaId: number) : Observable<any> {
         return this.http.get("http://localhost:8080/api/media/" + mediaId, { responseType: 'blob' });
     }
+
+    toggleLikeMeme(memeId: number) : Observable<boolean> {
+        return this.http.patch<boolean>("http://localhost:8080/api/memes/toggle-like/" + memeId, null);
+    }
 }

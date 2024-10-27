@@ -30,6 +30,10 @@ export class UserService {
         return this.http.get("http://localhost:8080/api/users/self/profile-pic", { responseType: 'blob' });
     }
 
+    findUserProfilePicByUsername(username: string): Observable<Blob> {
+        return this.http.get("http://localhost:8080/api/users/" + username + "/profile-pic", { responseType: 'blob' });
+    }
+
     findUserPosts(pageNum: number, pageSize: number, userId: number): Observable<any> {
         let params = new HttpParams()
             .set('pageNum', pageNum.toString())

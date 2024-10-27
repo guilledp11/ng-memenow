@@ -21,4 +21,12 @@ export class CommentService {
         return this.http.post("http://localhost:8080/api/comments/create", request);
     }
 
+    deleteComment(commentId: number) : Observable<any> {
+        return this.http.delete("http://localhost:8080/api/comments/delete/" + commentId);
+    }
+
+    toggleLikeComment(commentId: number) : Observable<boolean> {
+        return this.http.patch<boolean>("http://localhost:8080/api/comments/toggle-like/" + commentId, null);
+    }
+
 }

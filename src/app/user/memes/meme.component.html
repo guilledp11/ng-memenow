@@ -5,10 +5,25 @@
             <img [src]="userProfilePicUrl" alt="User Avatar" class="user-avatar" />
             <span class="username"> {{ meme?.createdBy }}</span>
         </div>
-        <button class="menu-button">
+        <button [matMenuTriggerFor]="menu" class="menu-button">
             <mat-icon>more_vert</mat-icon>
         </button>
     </div>
+
+    <mat-menu #menu="matMenu">
+        <button mat-menu-item>
+            <mat-icon>delete</mat-icon>
+            <span>Eliminar meme</span>
+        </button>
+        <button mat-menu-item >
+            <mat-icon>edit</mat-icon>
+            <span>Editar meme</span>
+        </button>
+        <button mat-menu-item>
+            <mat-icon>report</mat-icon>
+            <span>Denunciar meme</span>
+        </button>
+    </mat-menu>
 
     <hr class="separator" />
 
@@ -18,22 +33,50 @@
     </div>
 
     <hr class="separator" />
+    <div class="link-button-container"> {{ meme?.description }} </div>
+    <hr class="separator" />
+    <div *ngIf="viewCategories" class="categories-container">
+        <div *ngFor="let category of meme.categories" class="category-item">
+            {{category.name}}
+        </div>
+    </div>
+    <div class="link-button-container">
+        <button *ngIf="!viewCategories" (click)="viewCategories = true" class="link-button">
+            Show categories...
+        </button>
+    </div>
+    <hr class="separator" />
+    <div *ngIf="viewKeywords" class="keywords-container">
+        <div *ngFor="let keyword of meme.keywords" class="keyword-item">
+            {{keyword}}
+        </div>
+    </div>
+    <div class="link-button-container">
+        <button *ngIf="!viewKeywords" (click)="viewKeywords = true" class="link-button">
+            Show keywords...
+        </button>
+    </div>
+    <hr class="separator" />
 
     <div class="actions">
-        <button (click)="conditionLike = !conditionLike" [ngClass]="{'liked': conditionLike}">
-            <mat-icon>{{ conditionLike ? 'favorite' : 'favorite_border' }}</mat-icon>
-            {{ meme?.numLikes }} 
+        <button (click)="toggleLike()" [ngClass]="{'liked': meme?.liked}">
+            <mat-icon>{{ meme?.liked ? 'favorite' : 'favorite_border' }}</mat-icon>
+            {{ meme?.numLikes }}
         </button>
-        
+
         <button (click)="toggleComments()">
             <mat-icon>comment</mat-icon>
-            {{ meme?.numComments }} 
+            {{ meme?.numComments }}
         </button>
-        
-        <button [ngClass]="{'saved': conditionSaved}">
-            <mat-icon>{{ conditionSaved ? 'bookmark' : 'bookmark_border' }}</mat-icon>
+
+        <button (click)="download()">
+            <mat-icon>download</mat-icon>
         </button>
-        
+
+        <button (click)="meme.saved = !meme.saved" [ngClass]="{'saved': meme.saved}">
+            <mat-icon>{{ meme.saved ? 'bookmark' : 'bookmark_border' }}</mat-icon>
+        </button>
+
         <button>
             <mat-icon>send</mat-icon>
         </button>
@@ -43,12 +86,36 @@
 
     <!-- Sección de comentarios -->
     <div class="comments-section" *ngIf="commentsVisible">
-        <div class="comments-list" style="overflow-y: scroll;">
-            <div *ngFor="let comment of comments" class="comment">
-                <b>{{ comment.createdBy }}</b>
-                {{ comment.text }}
+        <div class="comments-list">
+            <div *ngFor="let comment of comments" class="comment-container" (focusin)="focusedComment = comment"
+                (focusout)="focusedComment = null" tabindex="0">
+                <div class="comment-content">
+                    <img [src]="getURLForProfilePic(comment.createdBy)" alt="User Avatar" class="user-avatar" />
+                    <div class="comment-text">
+                        <!-- Nombre de usuario como enlace -->
+                        <a [routerLink]="['/users', comment.createdBy]" class="username">{{ comment.createdBy }}</a>
+                        <span class="comment-body">{{ comment.text }}</span>
+                        <div class="comment-info">
+                            <span class="comment-time">{{ comment.timeAgo }}</span>
+                            <span class="comment-likes">{{ comment.numLikes }} Me gusta</span>
+                            <span *ngIf="focusedComment === comment" class="comment-reply">Responder</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="comment-actions">
+                    <button *ngIf="!comment.own" (click)="toggleLikeComment(comment)"
+                        [ngClass]="{'liked': comment.liked}">
+                        <mat-icon>{{ comment.liked ? 'favorite' : 'favorite_border' }}</mat-icon>
+                    </button>
+                    <button *ngIf="comment.own" (click)="deleteComment(comment)">
+                        <mat-icon>delete</mat-icon>
+                    </button>
+                </div>
             </div>
         </div>
+
+
         <div class="comment-input">
             <input [(ngModel)]="newComment" placeholder="Escribe un comentario..." />
             <button (click)="postComment()">Publicar</button>

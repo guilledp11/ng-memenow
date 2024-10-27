@@ -14,10 +14,11 @@ import { AdminCategoriesService } from './admin/categories/admin.categories.serv
 import { AdminCategoriesFormComponent } from './admin/categories/admin.categories.form.component';
 import { SharedModule } from './shared/shared.module';
 import { UserModule } from './user/user.module';
+import { SidebarComponent } from './home/sidebar.component';
 
 @NgModule({
   declarations: [
-    AppComponent, LoginComponent, HomeComponent, TimelineComponent, AdminCategoriesComponent, AdminCategoriesFormComponent
+    AppComponent, LoginComponent, HomeComponent, SidebarComponent, TimelineComponent, AdminCategoriesComponent, AdminCategoriesFormComponent
   ],
   imports: [
     BrowserModule,

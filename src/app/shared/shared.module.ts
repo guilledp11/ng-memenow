@@ -7,6 +7,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatMenuModule } from '@angular/material/menu';
 import { MatSortModule } from '@angular/material/sort';
 import { HttpClientModule } from '@angular/common/http';
 import { ValidationHelper } from './validation.helper';
@@ -31,6 +32,7 @@ import { GenericDialogComponent } from './modal/generic-dialog.component';
         MatPaginatorModule,
         MatSortModule,
         HttpClientModule,
+        MatMenuModule
     ],
     exports: [
         CommonModule,
@@ -43,6 +45,7 @@ import { GenericDialogComponent } from './modal/generic-dialog.component';
         MatTableModule,
         MatPaginatorModule,
         MatSortModule,
+        MatMenuModule,
         HttpClientModule,
         ValidationHelper,
         ValidationErrorsDirective,

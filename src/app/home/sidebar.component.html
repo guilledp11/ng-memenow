@@ -1,0 +1,27 @@
+<div class="sidebar">
+    <div class="app-title">MemeNow</div>
+    <hr class="separator" />
+    <ul class="sidebar-menu">
+      <li routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+        <a routerLink="/" class="menu-item">
+          <mat-icon>home</mat-icon> Home
+        </a>
+      </li>
+      <li routerLinkActive="active">
+        <a routerLink="/explore" class="menu-item">
+          <mat-icon>search</mat-icon> Explorar
+        </a>
+      </li>
+      <li routerLinkActive="active">
+        <a routerLink="/user/profile" class="menu-item">
+          <mat-icon>account_circle</mat-icon> Profile
+        </a>
+      </li>
+      <li>
+        <button class="post-meme-button">
+          <mat-icon>cloud_upload</mat-icon> Post Meme
+        </button>
+      </li>
+    </ul>
+  </div>
+  
