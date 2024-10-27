@@ -1,0 +1,57 @@
+<div class="post-container">
+
+    <div class="user-info-container">
+        <div class="user-info">
+            <img [src]="userProfilePicUrl" alt="User Avatar" class="user-avatar" />
+            <span class="username"> {{ meme?.createdBy }}</span>
+        </div>
+        <button class="menu-button">
+            <mat-icon>more_vert</mat-icon>
+        </button>
+    </div>
+
+    <hr class="separator" />
+
+    <!-- Imagen del post centrada -->
+    <div class="image-container">
+        <img [src]="mediaUrl" alt="Post Image" class="post-image" />
+    </div>
+
+    <hr class="separator" />
+
+    <div class="actions">
+        <button (click)="conditionLike = !conditionLike" [ngClass]="{'liked': conditionLike}">
+            <mat-icon>{{ conditionLike ? 'favorite' : 'favorite_border' }}</mat-icon>
+            {{ meme?.numLikes }} 
+        </button>
+        
+        <button (click)="toggleComments()">
+            <mat-icon>comment</mat-icon>
+            {{ meme?.numComments }} 
+        </button>
+        
+        <button [ngClass]="{'saved': conditionSaved}">
+            <mat-icon>{{ conditionSaved ? 'bookmark' : 'bookmark_border' }}</mat-icon>
+        </button>
+        
+        <button>
+            <mat-icon>send</mat-icon>
+        </button>
+    </div>
+
+    <hr class="separator" />
+
+    <!-- Sección de comentarios -->
+    <div class="comments-section" *ngIf="commentsVisible">
+        <div class="comments-list" style="overflow-y: scroll;">
+            <div *ngFor="let comment of comments" class="comment">
+                <b>{{ comment.createdBy }}</b>
+                {{ comment.text }}
+            </div>
+        </div>
+        <div class="comment-input">
+            <input [(ngModel)]="newComment" placeholder="Escribe un comentario..." />
+            <button (click)="postComment()">Publicar</button>
+        </div>
+    </div>
+</div>

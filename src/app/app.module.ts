@@ -9,7 +9,6 @@ import { routing } from './app.routing';
 import { HomeComponent } from './home/home.component';
 import { httpInterceptorProviders } from './auth/httpRequest.interceptor';
 import { TimelineComponent } from './home/timeline.component';
-import { UserInfoComponent } from './home/userInfo.component';
 import { AdminCategoriesComponent } from './admin/categories/admin.categories.component';
 import { AdminCategoriesService } from './admin/categories/admin.categories.service';
 import { AdminCategoriesFormComponent } from './admin/categories/admin.categories.form.component';
@@ -18,7 +17,7 @@ import { UserModule } from './user/user.module';
 
 @NgModule({
   declarations: [
-    AppComponent, LoginComponent, HomeComponent, TimelineComponent, UserInfoComponent, AdminCategoriesComponent, AdminCategoriesFormComponent
+    AppComponent, LoginComponent, HomeComponent, TimelineComponent, AdminCategoriesComponent, AdminCategoriesFormComponent
   ],
   imports: [
     BrowserModule,

@@ -1,0 +1,42 @@
+<div class="profile-container">
+  <!-- Foto redonda del usuario -->
+  <div class="avatar-container">
+    <img [src]="avatarUrl" alt="User Avatar" class="avatar" />
+  </div>
+  <!-- Nombre del usuario -->
+  <h2>guillediaz11</h2>
+
+  <!-- Tabla de estadísticas -->
+  <table class="stats-table">
+    <tr>
+      <th>Publicaciones</th>
+      <th>Seguidores</th>
+      <th>Seguidos</th>
+    </tr>
+    <tr>
+      <td>{{ stats?.numPublications }}</td>
+      <td>{{ stats?.numFollowers }}</td>
+      <td>{{ stats?.numFollowing }}</td>
+    </tr>
+  </table>
+
+  <div class="posts-grid">
+    <div *ngFor="let post of posts" class="post-item">
+      <a [routerLink]="['/meme', post.id]" class="post-link">
+        <!-- Contenedor de la imagen -->
+        <img [src]="post.mediaUrl" alt="Post Image" class="post-image" />
+        <!-- Capa superpuesta con datos adicionales -->
+        <div class="overlay">
+          <span class="data-item"><mat-icon class="data-item">comment</mat-icon>{{ post.numComments }}</span>
+          <span class="data-item"><mat-icon class="data-item">favorite</mat-icon>{{ post.numLikes }}</span>
+        </div>
+      </a>
+    </div>
+  </div>
+
+
+  <!-- Botón "Cargar más" -->
+  <div *ngIf="totalPosts != undefined && posts.length < totalPosts" class="load-more-container">
+    <button mat-button (click)="loadMorePosts()">Cargar más...</button>
+  </div>
+</div>

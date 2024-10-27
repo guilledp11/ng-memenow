@@ -18,31 +18,27 @@ export class UserService {
         exclude.forEach(val => {
             params = params.append('exclude', val.id);
         });
-        
-        return this.http.get<any[]>("http://localhost:8080/api/users/search", {params});
+
+        return this.http.get<any[]>("http://localhost:8080/api/users/search", { params });
     }
 
-    findAllCategories(subcategories: boolean, arrange: boolean): Observable<any> {
-        let params = new HttpParams().set("subcategories", subcategories).set("arrange", arrange);
-        return this.http.get<any[]>("http://localhost:8080/api/categories/all", { params });
+    findLoggedUser(): Observable<any> {
+        return this.http.get("http://localhost:8080/api/users/self");
     }
 
-    getElement(id: number): Observable<any | undefined> {
-        let params = new HttpParams().set("subcategories", true);
-        return this.http.get<any[]>("http://localhost:8080/api/categories/find/" + id, { params });
+    findLoggedUserImage(): Observable<Blob> {
+        return this.http.get("http://localhost:8080/api/users/self/profile-pic", { responseType: 'blob' });
     }
 
-    saveElement(element: any): Observable<any | undefined> {
-        if (element.id == 0 || element.id == null) {
-            return this.http.post<any>("http://localhost:8080/api/categories/create", element);
-        } else {
-            return this.http.put<any>("http://localhost:8080/api/categories/update/" + element.id, element);
-        }
+    findUserPosts(pageNum: number, pageSize: number, userId: number): Observable<any> {
+        let params = new HttpParams()
+            .set('pageNum', pageNum.toString())
+            .set('pageSize', pageSize.toString());
+        return this.http.get("http://localhost:8080/api/memes/user/" + userId, { params });
     }
 
-    deleteElement(id: number, rearrange: boolean = true): Observable<any | undefined> {
-        let params = new HttpParams().set("rearrange", rearrange);
-        return this.http.delete<any>("http://localhost:8080/api/categories/delete/" + id, { params });
+    findMediaByMemeId(memeId: number): Observable<Blob> {
+        return this.http.get("http://localhost:8080/api/memes/get/media/" + memeId, { responseType: 'blob' });
     }
 
 }

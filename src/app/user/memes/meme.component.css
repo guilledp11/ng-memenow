@@ -1,0 +1,93 @@
+.post-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-width: 600px; /* Ancho máximo para el post */
+    margin: auto;
+}
+
+.user-info-container {
+    display: flex;
+    justify-content: space-between; /* Espacio entre usuario y botón de menú */
+    align-items: center; /* Alineación vertical de los elementos */
+    width: 100%; /* Para que ocupe todo el ancho */
+    margin-top: 10px;
+}
+
+.user-info {
+    display: flex;
+    align-items: center;
+}
+
+.user-avatar {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    margin-right: 5px;
+}
+
+.menu-button {
+    background: none; /* Sin fondo */
+    border: none; /* Sin borde */
+    cursor: pointer; /* Cursor de mano */
+}
+
+.image-container {
+    position: relative;
+}
+
+.post-image {
+    width: 100%; /* Ajusta al ancho del contenedor */
+    height: auto; /* Mantiene la proporción */
+}
+
+.separator {
+    width: 100%;
+    border: 1px solid #ccc; /* Estilo del separador */
+    margin: 10px 0;
+}
+
+.actions {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.actions button {
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+.liked {
+    color: red; /* Cambia a rojo si está "me gusta" */
+}
+
+.comments-section {
+    width: 100%;
+    margin-top: 10px;
+}
+
+.comments-list {
+    max-height: 200px; /* Altura máxima para la lista de comentarios */
+    overflow-y: auto; /* Desplazamiento vertical si hay muchos comentarios */
+}
+
+.comment {
+    padding: 5px 10px; /* Espaciado de cada comentario */
+}
+
+.comment-input {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
+}
+
+.comment-input input {
+    flex: 1;
+    padding: 5px;
+}
+
+.comment-input button {
+    margin-left: 5px;
+}
