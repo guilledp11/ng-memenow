@@ -9,32 +9,16 @@ import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatSortModule } from '@angular/material/sort';
-import { HttpClientModule } from '@angular/common/http';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import { ValidationHelper } from './validation.helper';
 import { ValidationErrorsDirective } from './validationErrors.directive';
 import { GenericDialogComponent } from './modal/generic-dialog.component';
 import { NgSelectModule } from '@ng-select/ng-select';
 
-@NgModule({
-    declarations: [
+@NgModule({ declarations: [
         ValidationHelper,
         ValidationErrorsDirective,
         GenericDialogComponent
-    ],
-    imports: [
-        CommonModule,
-        FormsModule,
-        ReactiveFormsModule,
-        MatSnackBarModule,
-        MatDialogModule,
-        MatButtonModule,
-        MatIconModule,
-        MatTableModule,
-        MatPaginatorModule,
-        MatSortModule,
-        HttpClientModule,
-        MatMenuModule,
-        NgSelectModule
     ],
     exports: [
         CommonModule,
@@ -48,11 +32,20 @@ import { NgSelectModule } from '@ng-select/ng-select';
         MatPaginatorModule,
         MatSortModule,
         MatMenuModule,
-        HttpClientModule,
         NgSelectModule,
         ValidationHelper,
         ValidationErrorsDirective,
         GenericDialogComponent
-    ]
-})
+    ], imports: [CommonModule,
+        FormsModule,
+        ReactiveFormsModule,
+        MatSnackBarModule,
+        MatDialogModule,
+        MatButtonModule,
+        MatIconModule,
+        MatTableModule,
+        MatPaginatorModule,
+        MatSortModule,
+        MatMenuModule,
+        NgSelectModule], providers: [provideHttpClient(withInterceptorsFromDi())] })
 export class SharedModule { }
