@@ -13,6 +13,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { ValidationHelper } from './validation.helper';
 import { ValidationErrorsDirective } from './validationErrors.directive';
 import { GenericDialogComponent } from './modal/generic-dialog.component';
+import { NgSelectModule } from '@ng-select/ng-select';
 
 @NgModule({
     declarations: [
@@ -32,7 +33,8 @@ import { GenericDialogComponent } from './modal/generic-dialog.component';
         MatPaginatorModule,
         MatSortModule,
         HttpClientModule,
-        MatMenuModule
+        MatMenuModule,
+        NgSelectModule
     ],
     exports: [
         CommonModule,
@@ -47,6 +49,7 @@ import { GenericDialogComponent } from './modal/generic-dialog.component';
         MatSortModule,
         MatMenuModule,
         HttpClientModule,
+        NgSelectModule,
         ValidationHelper,
         ValidationErrorsDirective,
         GenericDialogComponent

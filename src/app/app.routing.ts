@@ -10,13 +10,16 @@ import { VisualizationGroupsComponent } from "./user/visualization-groups/visual
 import { VisualizationGroupsFormComponent } from "./user/visualization-groups/visualization.groups.form.component";
 import { UserProfileComponent } from "./user/profile/user.profile.component";
 import { MemeComponent } from "./user/memes/meme.component";
+import { MemeFormComponent } from "./user/memes/meme.form.component";
 
 const childRoutes: Routes = [
     { path: "", component: TimelineComponent },
     { path: "user/profile", component:  UserProfileComponent },
+    { path: "profile/:username", component:  UserProfileComponent },
     { path: "user/visualization-groups", component: VisualizationGroupsComponent},
     { path: "user/visualization-groups/:mode/:id", component: VisualizationGroupsFormComponent},
     { path: "user/visualization-groups/:mode", component: VisualizationGroupsFormComponent},
+    { path: "meme/create", component: MemeFormComponent},
     { path: "meme/:id", component: MemeComponent},
     { path: "admin/categories", component: AdminCategoriesComponent},
     { path: "admin/categories/:mode/:id", component: AdminCategoriesFormComponent},

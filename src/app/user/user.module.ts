@@ -10,10 +10,11 @@ import { UserProfileComponent } from "./profile/user.profile.component";
 import { MemeService } from "./meme.service";
 import { CommentService } from "./comment.service";
 import { MemeComponent } from "./memes/meme.component";
+import { MemeFormComponent } from "./memes/meme.form.component";
 
 @NgModule({
     declarations: [
-        VisualizationGroupsComponent, VisualizationGroupsFormComponent, MultipleUserSelectorComponent, UserProfileComponent, MemeComponent
+        VisualizationGroupsComponent, VisualizationGroupsFormComponent, MultipleUserSelectorComponent, UserProfileComponent, MemeComponent, MemeFormComponent
     ],
     imports: [
         RouterModule,

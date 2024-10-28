@@ -45,3 +45,11 @@
 .post-meme-button mat-icon {
     margin-right: 5px; /* Espaciado entre icono y texto */
 }
+
+.sidebar-linkgroup-title {
+    font-size: 0.8em; /* Tamaño de fuente más grande */
+    text-transform: uppercase;
+    font-weight: bold; /* Negrita */
+    color: #cecece; /* Color azul */
+    padding: 5px 10px; /* Espaciado */
+}

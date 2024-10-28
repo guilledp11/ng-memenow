@@ -4,7 +4,17 @@
     <img [src]="avatarUrl" alt="User Avatar" class="avatar" />
   </div>
   <!-- Nombre del usuario -->
-  <h2>guillediaz11</h2>
+  <h2>{{user?.username}}</h2>
+  <div>
+    <button mat-raised-button [color]="following ? 'primary' : 'accent'" (click)="toggleFollow()"
+      (mouseenter)="onMouseEnter()" (mouseleave)="onMouseLeave()" [ngStyle]="{
+          'background-color': following ? (hovering ? 'red' : 'white') : 'blue', 
+          'color': following ? (hovering ? 'white' : 'black') : 'white'
+        }">
+      {{ following ? (hovering ? 'Unfollow' : 'Following') : 'Follow' }}
+    </button>
+
+  </div>
 
   <!-- Tabla de estadísticas -->
   <table class="stats-table">
