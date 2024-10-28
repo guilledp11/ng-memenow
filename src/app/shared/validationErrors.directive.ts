@@ -1,5 +1,5 @@
 import { Directive, Input, TemplateRef, ViewContainerRef } from "@angular/core";
-import { FormGroup } from "@angular/forms";
+import { UntypedFormGroup } from "@angular/forms";
 import { ValidationHelper } from "./validation.helper";
 
 @Directive({
@@ -17,7 +17,7 @@ export class ValidationErrorsDirective {
     label?: string;
 
     @Input("validationErrors")
-    formGroup?: FormGroup;
+    formGroup?: UntypedFormGroup;
 
     ngOnInit() {
         let formatter = new ValidationHelper();

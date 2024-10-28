@@ -1,5 +1,5 @@
 import { Component } from "@angular/core";
-import { FormControl, FormGroup, Validators } from "@angular/forms";
+import { UntypedFormControl, UntypedFormGroup, Validators } from "@angular/forms";
 import { ActivatedRoute, Router } from "@angular/router";
 import { VisualizationGroupsService } from "./visualization.groups.service";
 import { MatSnackBar } from "@angular/material/snack-bar";
@@ -21,15 +21,15 @@ export class VisualizationGroupsFormComponent {
 
 
 
-    elementForm: FormGroup = new FormGroup({
-        name: new FormControl("", {
+    elementForm: UntypedFormGroup = new UntypedFormGroup({
+        name: new UntypedFormControl("", {
             validators: [
                 Validators.required,
                 Validators.minLength(3)
             ],
             updateOn: "change"
         }),
-        attached: new FormControl("", {})
+        attached: new UntypedFormControl("", {})
     });
 
     constructor(activeRoute: ActivatedRoute, private router: Router, private service: VisualizationGroupsService, private snackBar: MatSnackBar) {

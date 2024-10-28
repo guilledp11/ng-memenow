@@ -1,6 +1,6 @@
 import { templateSourceUrl } from "@angular/compiler";
 import { Component } from "@angular/core";
-import { FormGroup, FormBuilder, Validators } from "@angular/forms";
+import { UntypedFormGroup, UntypedFormBuilder, Validators } from "@angular/forms";
 import { Router } from "@angular/router";
 import { AuthService } from "./auth.service";
 import { MatSnackBar } from '@angular/material/snack-bar';
@@ -11,9 +11,9 @@ import { TokenStorageService } from "./tokenStorage.service";
     templateUrl: "login.component.html"
 })
 export class LoginComponent {
-    form: FormGroup;
+    form: UntypedFormGroup;
 
-    constructor(private fb: FormBuilder,
+    constructor(private fb: UntypedFormBuilder,
         private authService: AuthService,
         private storageService: TokenStorageService,
         private router: Router, private snackBar: MatSnackBar) {

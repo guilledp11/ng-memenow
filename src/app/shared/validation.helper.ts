@@ -1,12 +1,12 @@
 import { Pipe } from "@angular/core";
-import { FormControl, ValidationErrors } from "@angular/forms";
+import { UntypedFormControl, ValidationErrors } from "@angular/forms";
 @Pipe({
     name: "validationFormat"
 })
 export class ValidationHelper {
     transform(source: any, name: any): string[] {
-        if (source instanceof FormControl) {
-            return this.formatMessages((source as FormControl).errors, name)
+        if (source instanceof UntypedFormControl) {
+            return this.formatMessages((source as UntypedFormControl).errors, name)
         }
         return this.formatMessages(source as ValidationErrors, name)
     }

@@ -1,5 +1,5 @@
 import { Component } from "@angular/core";
-import { NgForm, FormControl, Validators, FormGroup, FormArray } from "@angular/forms";
+import { NgForm, UntypedFormControl, Validators, UntypedFormGroup, FormArray } from "@angular/forms";
 import { ActivatedRoute, Router } from "@angular/router";
 import { AdminCategoriesService } from "./admin.categories.service";
 import { MatSnackBar } from "@angular/material/snack-bar";
@@ -15,15 +15,15 @@ export class AdminCategoriesFormComponent {
 
 
 
-    elementForm: FormGroup = new FormGroup({
-        name: new FormControl("", {
+    elementForm: UntypedFormGroup = new UntypedFormGroup({
+        name: new UntypedFormControl("", {
             validators: [
                 Validators.required,
                 Validators.minLength(3)
             ],
             updateOn: "change"
         }),
-        parentId: new FormControl("", {})
+        parentId: new UntypedFormControl("", {})
     });
 
     constructor(activeRoute: ActivatedRoute, private router: Router, private service: AdminCategoriesService, private snackBar: MatSnackBar) {

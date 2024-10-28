@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormBuilder, FormControl, UntypedFormGroup, Validators } from '@angular/forms';
 
 @Component({
     selector: 'meme-form',
@@ -15,13 +15,13 @@ export class MemeFormComponent implements OnInit {
     visibilityOptions = ['public', 'protected', 'private'];
     protectedOptions = ['Option 1', 'Option 2', 'Option 3', 'Option 4']; // Datos para el combo múltiple
 
-    elementForm: FormGroup = this.fb.group({
+    elementForm: UntypedFormGroup = this.fb.group({
         descripcion: ['', Validators.required],
         visibility: ['public', Validators.required],
         protectedSelection: [{ value: [], disabled: true }] // Inicialmente deshabilitado
     });
 
-    constructor(private fb: FormBuilder) { }
+    constructor(private fb: UntypedFormBuilder) { }
 
     ngOnInit(): void {
         this.elementForm.get('visibility')?.valueChanges.subscribe(value => {
