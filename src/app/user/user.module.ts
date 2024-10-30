@@ -4,22 +4,25 @@ import { VisualizationGroupsComponent } from "./visualization-groups/visualizati
 import { VisualizationGroupsFormComponent } from "./visualization-groups/visualization.groups.form.component";
 import { VisualizationGroupsService } from "./visualization-groups/visualization.groups.service";
 import { RouterModule } from "@angular/router";
-import { MultipleUserSelectorComponent } from "./visualization-groups/user.selector.component";
 import { UserService } from "./user.service";
 import { UserProfileComponent } from "./profile/user.profile.component";
 import { MemeService } from "./meme.service";
 import { CommentService } from "./comment.service";
 import { MemeComponent } from "./memes/meme.component";
 import { MemeFormComponent } from "./memes/meme.form.component";
+import { KeywordInputComponent } from "./memes/keywords/keyword.input.component";
+import { NotificationService } from "./notifications/notification.service";
+import { NotificationsInboxComponent } from "./notifications/notificacions-inbox.component";
 
 @NgModule({
     declarations: [
-        VisualizationGroupsComponent, VisualizationGroupsFormComponent, MultipleUserSelectorComponent, UserProfileComponent, MemeComponent, MemeFormComponent
+        VisualizationGroupsComponent, VisualizationGroupsFormComponent, UserProfileComponent, MemeComponent, MemeFormComponent, KeywordInputComponent, NotificationsInboxComponent
     ],
     imports: [
         RouterModule,
         SharedModule
     ],
-    providers: [VisualizationGroupsService, UserService, MemeService, CommentService],
+    exports: [MemeComponent],
+    providers: [VisualizationGroupsService, UserService, MemeService, CommentService, NotificationService],
 })
 export class UserModule { }

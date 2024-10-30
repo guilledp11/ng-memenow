@@ -1,41 +1,68 @@
 <div class="upload-media-container card p-4">
+    <h2>Añadir Meme</h2>
     <form [formGroup]="elementForm" (ngSubmit)="submitForm()" (reset)="resetForm()" class="form-container">
-        <div class="form-group mb-3">
-            <label for="media-upload" class="form-label">Sube una imagen o video:</label>
-            <input type="file" id="media-upload" accept="image/*,video/*" (change)="onFileSelected($event)"
-                class="form-control" />
+        <div class="form-layout">
+            <!-- Columna izquierda -->
+            <div class="form-column">
+                <div class="form-group mb-3">
+                    <label for="media-upload" class="form-label">Sube una imagen o video:</label>
+                    <input type="file" id="media-upload" accept="image/*,video/*" (change)="onFileSelected($event)"
+                        class="form-control" />
+                </div>
+
+                <!-- Combo de visibilidad -->
+                <div class="form-group mb-3">
+                    <label for="visibility">Visibilidad:</label>
+                    <select id="visibility" formControlName="visibility" class="form-select">
+                        <option *ngFor="let option of visibilityOptions" [value]="option">
+                            {{ option }}
+                        </option>
+                    </select>
+                </div>
+
+                <div class="form-group mb-3">
+                    <label for="description">Descripción:</label>
+                    <textarea matInput formControlName="description" name="description" rows="3"
+                        placeholder="Agrega una descripción aquí..." class="form-control"></textarea>
+                </div>
+            </div>
+
+            <!-- Columna derecha -->
+            <div class="preview-column">
+                <div *ngIf="mediaPreview" class="preview-container mb-3">
+                    <img *ngIf="isImage" [src]="mediaPreview" alt="Vista previa de imagen" class="img-fluid rounded" />
+                    <video *ngIf="!isImage" [src]="mediaPreview" controls class="img-fluid rounded"></video>
+                </div>
+            </div>
         </div>
 
-        <!-- Vista previa de imagen o video -->
-        <div *ngIf="mediaPreview" class="preview-container mb-3">
-            <img *ngIf="isImage" [src]="mediaPreview" alt="Vista previa de imagen" class="img-fluid rounded" />
-            <video *ngIf="!isImage" [src]="mediaPreview" controls class="img-fluid rounded"></video>
+        <div class="selectors-row">
+            <div class="selector">
+                <label>Grupos de Visualización</label>
+                <multiple-selector *ngIf="selectedVisualizationGroupsLoaded || !editing" [editing]="editing"
+                    [displayProperty]="'name'" [searchFunc]="fetchVisualizationGroups.bind(this)"
+                    [selectedItems]="initialSelectedVisualizationGroups"
+                    (selectedItemsChange)="onVisualizationGroupsSelected($event)">
+                </multiple-selector>
+            </div>
+
+            <div class="selector">
+                <label>Categorías</label>
+                <multiple-selector *ngIf="selectedCategoriesLoaded || !editing" [editing]="editing"
+                    [displayProperty]="'name'" [searchFunc]="fetchCategories.bind(this)"
+                    [selectedItems]="initialSelectedCategories" (selectedItemsChange)="onCategoriesSelected($event)">
+                </multiple-selector>
+            </div>
+
+            <div class="selector">
+                <label>Palabras Clave</label>
+                <keyword-input (keywordsChange)="onKeywordsChange($event)"></keyword-input>
+            </div>
         </div>
 
-        <div class="form-group mb-3">
-            <label for="description">Description</label>
-            <textarea matInput [(ngModel)]="description" name="description" rows="3"
-                placeholder="Agrega una descripción aquí..." class="form-control"></textarea>
-        </div>
-
-
-        <!-- Combo de visibilidad -->
-        <div class="form-group mb-3">
-            <label for="visibility">Visibilidad:</label>
-            <select id="visibility" formControlName="visibility" class="form-select">
-                <option *ngFor="let option of visibilityOptions" [value]="option">
-                    {{ option }}
-                </option>
-            </select>
-        </div>
-
-        <!-- Combo de selección múltiple que se habilita si la visibilidad es "protected" -->
-        <div class="form-group mb-3" *ngIf="elementForm.get('visibility')?.value === 'protected'">
-            <label for="protectedSelection">Selecciona opciones:</label>
-            <ng-select id="protectedSelection" formControlName="protectedSelection" [items]="protectedOptions"
-                [multiple]="true" [closeOnSelect]="false" placeholder="Selecciona opciones..." [searchable]="true"
-                bindLabel="name" bindValue="id">
-            </ng-select>
+        <div class="button-container">
+            <button type="button" (click)="resetForm()" class="btn btn-secondary">Cancelar</button>
+            <button type="submit" class="btn btn-primary">Guardar</button>
         </div>
     </form>
 </div>

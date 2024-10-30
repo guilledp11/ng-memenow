@@ -1,52 +1,13 @@
-.user-selector-container {
-  border: 1px solid #ddd; /* Borde sutil */
-  border-radius: 8px; /* Bordes redondeados */
-  padding: 15px; /* Padding interno para el contenido */
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05); /* Sombra ligera para darle profundidad */
-}
 
-.selected-users {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px; /* Espaciado entre tarjetas */
-  margin-bottom: 15px; /* Separación de las tarjetas con el campo de texto */
+.badge-primary {
+  color: white; 
+  margin: 2px;
 }
+  
 
-.user-card {
-  display: flex;
-  align-items: center;
-  background-color: #f1f1f1;
-  border-radius: 8px;
-  padding: 5px 10px;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-  position: relative;
-  min-width: 150px;
-}
-
-.user-name {
-  flex-grow: 1;
-  margin-right: 10px;
-}
-
-.remove-btn {
-  background: none;
-  border: none;
-  font-size: 16px;
-  cursor: pointer;
-  color: #888;
-}
-
-.remove-btn:hover {
-  color: #555;
-}
-
-/* Campo de búsqueda */
 .search-input {
   width: 100%;
-  padding: 8px;
   margin-bottom: 15px; /* Espaciado inferior */
-  border: 1px solid #ccc;
-  border-radius: 4px;
 }
 
 .loading {

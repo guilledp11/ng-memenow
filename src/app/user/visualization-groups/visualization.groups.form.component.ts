@@ -3,6 +3,8 @@ import { UntypedFormControl, UntypedFormGroup, Validators } from "@angular/forms
 import { ActivatedRoute, Router } from "@angular/router";
 import { VisualizationGroupsService } from "./visualization.groups.service";
 import { MatSnackBar } from "@angular/material/snack-bar";
+import { UserService } from "../user.service";
+import { Observable } from "rxjs";
 
 @Component({
     selector: "visualization-groups-form",
@@ -32,7 +34,7 @@ export class VisualizationGroupsFormComponent {
         attached: new UntypedFormControl("", {})
     });
 
-    constructor(activeRoute: ActivatedRoute, private router: Router, private service: VisualizationGroupsService, private snackBar: MatSnackBar) {
+    constructor(activeRoute: ActivatedRoute, private router: Router, private service: VisualizationGroupsService, private userService: UserService, private snackBar: MatSnackBar) {
         activeRoute.params.subscribe(params => {
             this.editing = params["mode"] == "edit";
             let id = params["id"];
@@ -86,5 +88,9 @@ export class VisualizationGroupsFormComponent {
 
     onUsersSelected(users: any[]) {
         this.element.contactsIds = users.map(user => user.id);
+    }
+
+    fetchUsers(page: number, pageSize: number, searchQuery: string, selectedItems: any[]): Observable<any> {
+        return this.userService.searchUsers(page, pageSize, searchQuery, selectedItems);
     }
 }

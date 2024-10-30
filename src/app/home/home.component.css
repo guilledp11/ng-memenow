@@ -117,3 +117,17 @@
   border: none;
   cursor: pointer;
 }
+
+.notification-icon {
+  position: relative; /* Asegura que el badge esté posicionado relativo a la campana */
+}
+
+.notification-bell {
+  font-size: 1.5rem; /* Ajusta el tamaño del icono de campana */
+}
+
+.badge {
+  position: absolute;
+  top: -5px; /* Ajusta la posición del badge */
+  /* Otros estilos del badge si es necesario */
+}

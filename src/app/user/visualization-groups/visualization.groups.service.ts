@@ -29,4 +29,17 @@ export class VisualizationGroupsService {
         return this.http.delete<any>("http://localhost:8080/api/visualization-groups/delete/" + id);
     }
 
+    search(pageNum: number, pageSize: number, query: string, exclude: any[]): Observable<any> {
+        let params = new HttpParams()
+            .set('pageNum', pageNum.toString())
+            .set('pageSize', pageSize.toString())
+            .set('searchQuery', query);
+
+        exclude.forEach(val => {
+            params = params.append('exclude', val.id);
+        });
+
+        return this.http.get<any[]>("http://localhost:8080/api/visualization-groups/search", { params });
+    }
+
 }

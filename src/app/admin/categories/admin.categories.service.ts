@@ -32,4 +32,13 @@ export class AdminCategoriesService {
         return this.http.delete<any>("http://localhost:8080/api/categories/delete/" + id, { params });
     }
 
+    search(pageNum: number, pageSize: number, query: string): Observable<any> {
+        let params = new HttpParams()
+            .set('pageNum', pageNum.toString())
+            .set('pageSize', pageSize.toString())
+            .set('searchQuery', query);
+
+        return this.http.get<any[]>("http://localhost:8080/api/categories/search", { params });
+    }
+
 }

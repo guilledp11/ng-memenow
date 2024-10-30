@@ -1,5 +1,12 @@
 import { Component, OnInit } from '@angular/core';
+import { setActiveConsumer } from '@angular/core/primitives/signals';
 import { UntypedFormBuilder, FormControl, UntypedFormGroup, Validators } from '@angular/forms';
+import { Observable } from 'rxjs';
+import { AdminCategoriesService } from 'src/app/admin/categories/admin.categories.service';
+import { VisualizationGroupsService } from '../visualization-groups/visualization.groups.service';
+import { MemeService } from '../meme.service';
+import { Router } from '@angular/router';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
     selector: 'meme-form',
@@ -8,20 +15,30 @@ import { UntypedFormBuilder, FormControl, UntypedFormGroup, Validators } from '@
 })
 export class MemeFormComponent implements OnInit {
 
+    editing: boolean = false;
+    selectedFile! : File;
+
+    selectedCategoriesLoaded: boolean = true;
+    initialSelectedCategories: any[] = [];
+    selectedVisualizationGroupsLoaded: boolean = true;
+    initialSelectedVisualizationGroups: any[] = [];
+
     mediaPreview: string | ArrayBuffer | null | undefined = null;
     isImage: boolean = false;
-    description: string = '';
 
-    visibilityOptions = ['public', 'protected', 'private'];
-    protectedOptions = ['Option 1', 'Option 2', 'Option 3', 'Option 4']; // Datos para el combo múltiple
+    visibilityOptions = ['PUBLICO', 'PROTEGIDO', 'PRIVADO'];
+
+    meme: any = {};
 
     elementForm: UntypedFormGroup = this.fb.group({
-        descripcion: ['', Validators.required],
+        description: ['', Validators.required],
         visibility: ['public', Validators.required],
-        protectedSelection: [{ value: [], disabled: true }] // Inicialmente deshabilitado
+
     });
 
-    constructor(private fb: UntypedFormBuilder) { }
+    constructor(private fb: UntypedFormBuilder, private categoryService: AdminCategoriesService,
+        private router: Router, private snackBar: MatSnackBar,
+        private visualizationGroupService: VisualizationGroupsService, private memeService: MemeService) { }
 
     ngOnInit(): void {
         this.elementForm.get('visibility')?.valueChanges.subscribe(value => {
@@ -47,21 +64,57 @@ export class MemeFormComponent implements OnInit {
             };
 
             reader.readAsDataURL(file);
+            this.selectedFile = file;
         }
     }
 
     submitForm(): void {
-        if (!this.mediaPreview || !this.description.trim()) {
-            alert('Sube un archivo y proporciona una descripción.');
-            return;
+        if (this.elementForm.valid) {
+            Object.assign(this.meme, this.elementForm.value);
+            if (this.selectedFile) {
+                const formData = new FormData();
+                formData.append('file', this.selectedFile, this.selectedFile.name); // Adjuntar el archivo original
+                formData.append('data', JSON.stringify(this.meme));
+
+                this.memeService.save(formData).subscribe(res => {
+                    this.router.navigateByUrl("/user/profile");
+                this.snackBar.open('Meme has been posted succesfully', 'Close', {
+                    duration: 5000,
+                    panelClass: 'error-snackbar'
+                });
+                }, resmal => {
+                    this.snackBar.open('There has been an error during save', 'Close', {
+                        duration: 5000,
+                        panelClass: 'error-snackbar'
+                    });
+                });
+            }
         }
 
-        // Aquí se puede procesar la subida de datos a un servidor o realizar otras acciones
-        console.log('Archivo:', this.mediaPreview);
-        console.log('Descripción:', this.description);
+
     }
 
     resetForm(): void {
 
+    }
+
+    onCategoriesSelected(categories: any[]) {
+        this.meme.categoriesIds = categories.map(category => category.id);
+    }
+
+    fetchCategories(page: number, pageSize: number, searchQuery: string, selectedItems: any[]): Observable<any> {
+        return this.categoryService.search(page, pageSize, searchQuery);
+    }
+
+    onVisualizationGroupsSelected(visualizationGroups: any[]) {
+        this.meme.visualizationGroupsIds = visualizationGroups.map(visualizationGroup => visualizationGroup.id);
+    }
+
+    fetchVisualizationGroups(page: number, pageSize: number, searchQuery: string, selectedItems: any[]): Observable<any> {
+        return this.visualizationGroupService.search(page, pageSize, searchQuery, selectedItems);
+    }
+
+    onKeywordsChange(keywords: string[]): void {
+        this.meme.keywords = keywords;
     }
 }

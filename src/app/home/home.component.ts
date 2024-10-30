@@ -3,6 +3,7 @@ import { ActivatedRoute } from "@angular/router";
 import { AuthService } from "../auth/auth.service";
 import { DomSanitizer, SafeUrl } from "@angular/platform-browser";
 import { UserService } from "../user/user.service";
+import { NotificationService } from "../user/notifications/notification.service";
 
 @Component({
     selector: "home",
@@ -19,8 +20,10 @@ export class HomeComponent {
     userSearchResults: any[] = [];
 
     dropdownOpen: boolean = false; // Controlar el estado del dropdown
+    unreadNotifications: number = 0;
 
     constructor(private activeRoute: ActivatedRoute, private authService: AuthService,
+        private notificationService: NotificationService,
         private userService: UserService, private sanitizer: DomSanitizer) {
         activeRoute.params.subscribe(params => {
 
@@ -34,6 +37,10 @@ export class HomeComponent {
 
         this.userService.findLoggedUserImage().subscribe(blob => {
             this.profilePicUrl = this.sanitizer.bypassSecurityTrustUrl(URL.createObjectURL(blob));
+        });
+
+        this.notificationService.getNumUnreadNotifications().subscribe(res => {
+            this.unreadNotifications = res;
         });
     }
 
@@ -81,4 +88,6 @@ export class HomeComponent {
     closeDropdown(): void {
         this.dropdownOpen = false; // Cierra el dropdown
     }
+
+
 }

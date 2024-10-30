@@ -1,1 +1,9 @@
-<p>TIMELINE</p>
+<div class="timeline">
+    <div *ngFor="let memeId of memesIds">
+        <meme [memeId]="memeId"></meme>
+    </div>
+</div>
+
+<div *ngIf="isLoading" class="loading-spinner">
+    Cargando más memes...
+</div>

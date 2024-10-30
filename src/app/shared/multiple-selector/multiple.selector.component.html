@@ -1,0 +1,23 @@
+<div class="item-selector-container">
+    <div *ngIf="selectedItems.length > 0" class="keywords">
+        <span *ngFor="let item of selectedItems" [style.background-color]="color" class="badge badge-primary mr-2">{{ item[displayProperty] }}  <button class="btn-close btn-close-white" type="button" (click)="removeItem(item)"></button></span>
+    </div>
+
+    <input type="text" [(ngModel)]="searchQuery" (input)="onSearch()" placeholder="Buscar elementos..."
+        class="search-input form-control" />
+
+    <div class="item-list">
+        <div *ngFor="let item of items" class="item-item">
+            <label class="custom-checkbox">
+                <input type="checkbox" [checked]="selectedItems.includes(item)" (change)="toggleItemSelection(item)" />
+                <span class="checkmark"></span>
+                {{ item[displayProperty] }}
+            </label>
+        </div>
+    </div>
+
+    <button *ngIf="!loading && hasMoreItems" type="button" (click)="loadMoreItems()" class="load-more-btn">
+        <span class="plus-icon">+</span> Cargar más
+    </button>
+    <div *ngIf="loading" class="loading">Cargando más elementos...</div>
+</div> 

@@ -3,15 +3,17 @@
     <div class="user-info-container">
         <div class="user-info">
             <img [src]="userProfilePicUrl" alt="User Avatar" class="user-avatar" />
-            <span class="username"> {{ meme?.createdBy }}</span>
+            <span class="username"> {{ meme?.createdBy }}  </span>
+            <div class="time-ago">hace {{meme?.timeAgo}}</div>
         </div>
+       
         <button [matMenuTriggerFor]="menu" class="menu-button">
             <mat-icon>more_vert</mat-icon>
         </button>
     </div>
 
     <mat-menu #menu="matMenu">
-        <button mat-menu-item>
+        <button mat-menu-item (click)="deleteMeme()">
             <mat-icon>delete</mat-icon>
             <span>Eliminar meme</span>
         </button>
@@ -73,8 +75,8 @@
             <mat-icon>download</mat-icon>
         </button>
 
-        <button (click)="meme.saved = !meme.saved" [ngClass]="{'saved': meme.saved}">
-            <mat-icon>{{ meme.saved ? 'bookmark' : 'bookmark_border' }}</mat-icon>
+        <button (click)="meme.saved = !meme?.saved" [ngClass]="{'saved': meme.saved}">
+            <mat-icon>{{ meme?.saved ? 'bookmark' : 'bookmark_border' }}</mat-icon>
         </button>
 
         <button>

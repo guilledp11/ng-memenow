@@ -24,9 +24,10 @@
 
     <div class="form-group user-selector">
         <label>Belonging users</label>
-        <multiple-user-selector *ngIf="selectedUsersLoaded || !editing" [editing]="editing"
-            [selectedUsers]="initialSelectedUsers" (selectedUsersChange)="onUsersSelected($event)">
-        </multiple-user-selector>
+        <multiple-selector *ngIf="selectedUsersLoaded || !editing" [editing]="editing"
+            [displayProperty]="'username'" [searchFunc]="fetchUsers.bind(this)"
+            [selectedItems]="initialSelectedUsers" (selectedItemsChange)="onUsersSelected($event)">
+        </multiple-selector>
     </div>
 
 

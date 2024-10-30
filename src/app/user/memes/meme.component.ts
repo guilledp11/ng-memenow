@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { CommentService } from '../comment.service';
 import { MemeService } from '../meme.service';
 import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
@@ -15,7 +15,7 @@ export class MemeComponent implements OnInit {
 
     @Input() memeId!: number;
     userProfilePicUrl: SafeUrl | undefined;
-    meme: any;
+    meme: any = {};
     mediaUrl: SafeUrl | undefined;
     mediaBlob: Blob | undefined;
     conditionLike: boolean = false;
@@ -32,7 +32,7 @@ export class MemeComponent implements OnInit {
 
 
     constructor(private route: ActivatedRoute, private commentService: CommentService, private memeService: MemeService,
-        private userService: UserService, private sanitizer: DomSanitizer, private snackBar: MatSnackBar) {
+        private userService: UserService, private sanitizer: DomSanitizer, private snackBar: MatSnackBar, private router: Router) {
 
     }
 
@@ -144,5 +144,11 @@ export class MemeComponent implements OnInit {
             // Limpiar la URL del objeto después de la descarga para liberar memoria
             URL.revokeObjectURL(downloadUrl);
         }
+    }
+
+    deleteMeme() {
+        this.memeService.delete(this.memeId).subscribe(res => {
+            this.router.navigateByUrl("/user/profile");
+        });
     }
 }

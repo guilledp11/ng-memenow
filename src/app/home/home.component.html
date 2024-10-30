@@ -23,6 +23,18 @@
           </div>
 
 
+          <div class="notification-icon" style="margin-left: 10px;">
+            <a class="nav-link position-relative" [routerLink]="['/notifications/inbox']">
+              <mat-icon class="notification-bell">notifications</mat-icon> <!-- Icono de campana -->
+              <span class="badge bg-danger position-absolute top-0 start-100 translate-middle"
+                *ngIf="unreadNotifications > 0">
+                {{ unreadNotifications }}
+              </span>
+            </a>
+          </div>
+
+
+
           <div class="dropdown" style="margin-left: 10px;">
             <button class="btn dropdown-toggle d-flex align-items-center" type="button" id="dropdownMenuButton"
               data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

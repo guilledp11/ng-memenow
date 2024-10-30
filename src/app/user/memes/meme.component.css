@@ -26,6 +26,12 @@
     margin-right: 5px;
 }
 
+.time-ago {
+    color:#6d6d6d;
+    font-size: 11px;
+    margin-left: 5px;
+}
+
 .menu-button {
     background: none; /* Sin fondo */
     border: none; /* Sin borde */

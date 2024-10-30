@@ -1,0 +1,28 @@
+<div class="notification-list">
+    <div *ngFor="let notification of notifications" class="notification-card"
+        [ngClass]="{'unread': !notification.isRead}">
+
+        <div class="notification-icon">
+            <span *ngIf="!notification.isRead" class="notification-dot"></span>
+            <mat-icon>{{ getIconForType(notification.notificationType) }}</mat-icon>
+            <!-- Usar icono basado en el tipo -->
+        </div>
+
+        <div class="notification-message">
+            {{ notification.text }}
+        </div>
+
+        <div class="notification-buttons">
+            <button *ngIf="notification.read == true" (click)="markAsRead(notification)">
+                <mat-icon>visibility</mat-icon> <!-- Ojo para marcar como visto -->
+            </button>
+            <button (click)="deleteNotification(notification)">
+                <mat-icon>delete</mat-icon> <!-- Icono de eliminar -->
+            </button>
+        </div>
+    </div>
+
+    <button *ngIf="(pageNum + 1) * pageSize < totalNotifications" (click)="loadMore()" class="load-more">
+        Cargar más
+    </button>
+</div>

@@ -11,6 +11,7 @@ import { VisualizationGroupsFormComponent } from "./user/visualization-groups/vi
 import { UserProfileComponent } from "./user/profile/user.profile.component";
 import { MemeComponent } from "./user/memes/meme.component";
 import { MemeFormComponent } from "./user/memes/meme.form.component";
+import { NotificationsInboxComponent } from "./user/notifications/notificacions-inbox.component";
 
 const childRoutes: Routes = [
     { path: "", component: TimelineComponent },
@@ -21,6 +22,7 @@ const childRoutes: Routes = [
     { path: "user/visualization-groups/:mode", component: VisualizationGroupsFormComponent},
     { path: "meme/create", component: MemeFormComponent},
     { path: "meme/:id", component: MemeComponent},
+    { path: "notifications/inbox", component: NotificationsInboxComponent},
     { path: "admin/categories", component: AdminCategoriesComponent},
     { path: "admin/categories/:mode/:id", component: AdminCategoriesFormComponent},
     { path: "admin/categories/:mode", component: AdminCategoriesFormComponent}

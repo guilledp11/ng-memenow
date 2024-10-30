@@ -1,0 +1,102 @@
+.upload-media-container {
+    max-width: calc(100% - 40px); /* Ocupa todo el ancho menos los márgenes laterales de 20px cada uno */
+    margin: 20px; /* Márgenes laterales de 20px */
+    border-radius: 8px; /* Bordes redondeados */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra suave */
+    background-color: #fff; /* Fondo blanco */
+    padding: 20px; /* Espaciado interno */
+    display: flex;
+    flex-direction: column;
+}
+
+.form-layout {
+    display: flex; /* Usar flexbox para la disposición */
+    margin-bottom: 20px; /* Espacio entre la vista previa y el resto del formulario */
+}
+
+.form-column {
+    flex: 1; /* Ocupa la mitad del espacio */
+    padding-right: 20px; /* Espacio entre columnas */
+}
+
+.preview-column {
+    flex: 1; /* Ocupa la mitad del espacio */
+    border: 1px solid #ccc; /* Marco alrededor de la previsualización */
+    border-radius: 8px; /* Bordes redondeados para el marco */
+    padding: 10px; /* Espaciado interno */
+    display: flex;
+    align-items: center; /* Centrar verticalmente */
+    justify-content: center; /* Centrar horizontalmente */
+    background-color: #f9f9f9; /* Color de fondo ligero para el área de previsualización */
+}
+
+.preview-container {
+    max-width: 100%; /* Limitar el ancho de la vista previa */
+    max-height: 400px; /* Altura máxima para la previsualización */
+    overflow: hidden; /* Ocultar el desbordamiento */
+}
+
+.selectors-row {
+    display: flex; /* Usar flexbox para alinear los selectores en una fila */
+    justify-content: space-between; /* Espaciado entre los selectores */
+    margin-top: 20px; /* Espacio entre la fila de selectores y el contenido anterior */
+}
+
+.selector {
+    flex: 1; /* Cada selector ocupará el mismo ancho */
+    margin-right: 10px; /* Espacio entre selectores */
+}
+
+.selector:last-child {
+    margin-right: 0; /* El último selector no necesita margen derecho */
+}
+
+.button-container {
+    display: flex; /* Usar flexbox para alinear los botones */
+    justify-content: space-between; /* Espaciado entre los botones */
+    margin-top: 20px; /* Espacio por encima de los botones */
+}
+
+.button-container button {
+    flex: 1; /* Los botones ocuparán el mismo ancho */
+    margin-left: 10px; /* Espacio entre los botones */
+}
+
+.button-container button:first-child {
+    margin-left: 0; /* El primer botón no necesita margen izquierdo */
+}
+
+/* Media Queries para Responsividad */
+@media (max-width: 768px) {
+    .form-layout {
+        flex-direction: column; /* Apilar elementos verticalmente en pantallas pequeñas */
+    }
+
+    .form-column {
+        padding-right: 0; /* Eliminar el espaciado entre columnas al apilar */
+        margin-bottom: 20px; /* Espacio inferior para separar columnas apiladas */
+    }
+
+    .selectors-row {
+        flex-direction: column; /* Apilar selectores verticalmente */
+    }
+
+    .selector {
+        margin-right: 0; /* Eliminar margen derecho en apilamiento */
+        margin-bottom: 10px; /* Espacio inferior entre selectores */
+    }
+
+    .button-container {
+        flex-direction: column; /* Apilar botones verticalmente */
+        margin-top: 20px; /* Espacio superior para los botones apilados */
+    }
+
+    .button-container button {
+        margin-left: 0; /* Eliminar margen izquierdo en apilamiento */
+        margin-bottom: 10px; /* Espacio inferior entre botones */
+    }
+
+    .button-container button:last-child {
+        margin-bottom: 0; /* Eliminar margen inferior del último botón */
+    }
+}

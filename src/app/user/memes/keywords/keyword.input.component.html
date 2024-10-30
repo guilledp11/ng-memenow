@@ -1,0 +1,14 @@
+<div class="keyword-input-container">
+    <div class="keywords">
+        <span *ngFor="let keyword of keywords" class="badge badge-primary mr-2">
+            {{ keyword }}
+            <button class="btn-close btn-close-white" type="button" aria-label="Close" (click)="removeKeyword(keyword)"></button>
+        </span>
+    </div>
+
+    <div class="input-group">
+        <input type="text" class="form-control" [(ngModel)]="newKeyword" (keydown.enter)="addKeyword($event)"
+            placeholder="Añadir nueva keyword..." />
+        <button class="btn btn-outline-secondary" type="button" (click)="addKeyword($event)">Añadir</button>
+    </div>
+</div>
